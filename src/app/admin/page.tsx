@@ -28,10 +28,8 @@ async function getUserData() {
 }
 
 export default async function AdminDashboard() {
-  const [salesData, userData] = await Promise.all([
-    getSalesData(), getUserData()
-  ])
-}
+  const [salesData, userData] = await Promise.all([getSalesData(), getUserData()])
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <DashboardCard
@@ -40,8 +38,13 @@ export default async function AdminDashboard() {
         body={formatCurrency(salesData.amount)}
       />
       <DashboardCard
-        title="Customer"
-        subtitle={`${formatCurrency()} Average Value`}
+        title="Customers"
+        subtitle={`${formatCurrency(userData.averageValuePerUser)} Average Value`}
+        body={formatNumber(userData.userCount)}
+      />
+      <DashboardCard
+        title="Active Products"
+        subtitle={`${formatNumber()} Inactive Products`}
         body={formatNumber()}
       />
     </div>
