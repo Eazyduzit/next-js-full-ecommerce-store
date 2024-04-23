@@ -9,7 +9,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import db from "@/db/db"
-import { CheckCircle2, XCircle } from "lucide-react"
+import { formatCurrency, formatNumber } from "@/lib/formatters"
+import { CheckCircle2, MoreVertical, XCircle } from "lucide-react"
 import Link from "next/link"
 
 export default function AdminProductsPage() {
@@ -70,6 +71,13 @@ async function ProductsTable() {
                   <XCircle />
                 </>
               )}
+            </TableCell>
+            <TableCell>{product.name}</TableCell>
+            <TableCell>{formatCurrency(product.priceInCents / 100)}</TableCell>
+            <TableCell>{formatNumber(product._count.orders)}</TableCell>
+            <TableCell>
+              <MoreVertical />
+              <span className="sr-only">Actions</span>
             </TableCell>
           </TableRow>
         ))}
