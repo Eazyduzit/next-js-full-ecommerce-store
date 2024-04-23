@@ -4,6 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
@@ -18,6 +19,7 @@ import db from "@/db/db"
 import { formatCurrency, formatNumber } from "@/lib/formatters"
 import { CheckCircle2, MoreVertical, XCircle } from "lucide-react"
 import Link from "next/link"
+import { ActiveToggleDropdownItem, DeleteDropdownItem } from "./_components/ProductActions"
 
 export default function AdminProductsPage() {
   return (
@@ -96,6 +98,12 @@ async function ProductsTable() {
                   <DropdownMenuItem asChild>
                     <Link href={`/admin/products/${product.id}/edit`}>Edit</Link>
                   </DropdownMenuItem>
+                  <ActiveToggleDropdownItem
+                    id={product.id}
+                    isAvailableForPurchase={product.isAvailableForPurchase}
+                  />
+                  <DropdownMenuSeparator />
+                  <DeleteDropdownItem id={product.id} disabled={product._count.orders > 0} />
                 </DropdownMenuContent>
               </DropdownMenu>
             </TableCell>
