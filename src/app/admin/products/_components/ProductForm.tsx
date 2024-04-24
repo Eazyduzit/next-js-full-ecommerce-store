@@ -9,6 +9,7 @@ import { useState } from "react"
 import { addProduct } from "../../_actions/products"
 import { useFormState, useFormStatus } from "react-dom"
 import { Product } from "@prisma/client"
+import Image from "next/image"
 
 export function ProductForm({ product }: { product?: Product | null }) {
   const [error, action] = useFormState(addProduct, {})
@@ -46,11 +47,16 @@ export function ProductForm({ product }: { product?: Product | null }) {
       <div className="space-y-2">
         <Label htmlFor="file">File</Label>
         <Input type="file" id="file" name="file" required={product == null} />
+        {product != null && <div className="text-muted-foreground">{product.filePath}</div>}
         {error.file && <div className="text-destructive">{error.file}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="image">Image</Label>
         <Input type="file" id="image" name="image" required={product == null} />
+        {product != null && <div className="text-muted-foreground">{product.imagePath}</div>}
+        {product != null && (
+          <Image src={product.imagePath} alt="Product Image" height="400" width={400} />
+        )}
         {error.image && <div className="text-destructive">{error.image}</div>}
       </div>
       <SubmitButton />
