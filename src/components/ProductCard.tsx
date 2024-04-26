@@ -12,7 +12,13 @@ type ProductCardProps = {
   imagePath: string
 }
 
-export function ProductCard({ id, name, priceInCents, description, imagePath }: ProductCardProps) {
+export default function ProductCard({
+  id,
+  name,
+  priceInCents,
+  description,
+  imagePath,
+}: ProductCardProps) {
   return (
     <Card className="flex overflow-hidden flex-col">
       <div className="relative w-full h-auto aspect-video">

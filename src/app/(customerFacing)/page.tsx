@@ -8,7 +8,7 @@ import Link from "next/link"
 function getMostPopularProducts() {
   return db.product.findMany({
     where: { isAvailableForPurchase: true },
-    orderBy: { createdAt: "desc" },
+    orderBy: { orders: { _count: "desc" } },
     take: 6,
   })
 }
@@ -16,7 +16,7 @@ function getMostPopularProducts() {
 function getNewestProducts() {
   return db.product.findMany({
     where: { isAvailableForPurchase: true },
-    orderBy: { orders: { _count: "desc" } },
+    orderBy: { createdAt: "desc" },
     take: 6,
   })
 }
@@ -35,7 +35,7 @@ type ProductGridSectionProps = {
   productsFetcher: () => Promise<Product[]>
 }
 
-function ProductGridSection({ title, productsFetcher }: ProductGridSectionProps) {
+async function ProductGridSection({ title, productsFetcher }: ProductGridSectionProps) {
   return (
     <div className="space-y-4">
       <div className="flex gap-4">
@@ -48,7 +48,9 @@ function ProductGridSection({ title, productsFetcher }: ProductGridSectionProps)
         </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <ProductCard />
+        {(await productsFetcher()).map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
       </div>
     </div>
   )
