@@ -1,3 +1,13 @@
+## About this project
+
+This is a fullstack eCommerce application, with a user page and admin dashboard. (admin dashboard @ localhost3000/admin, login: admin / test)
+
+It is set up using Prisma database, Next.js, Typescript, TailwindCSS and Stripe for payment. (Stripe is just set up for testing purposes: use card info 4242 4242 4242 4242)
+
+All credit goes to WebDevSimplified. https://www.youtube.com/watch?v=iqrgggs0Qk0&list=PLtUoxdC5MHdkxeM68Ai_I91T8Q6WbnMhV&index=52&ab_channel=WebDevSimplified
+
+## Create Next App
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
