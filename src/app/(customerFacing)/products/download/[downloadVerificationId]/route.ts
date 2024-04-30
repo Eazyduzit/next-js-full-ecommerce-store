@@ -13,6 +13,7 @@ export async function GET(
 
   if (data == null) {
     return NextResponse.redirect(new URL("/products/download/expired", req.url))
+    // "/products/download/[downloadVerificationId]/expired/page")
   }
   const { size } = await fs.stat(data.product.filePath)
   const file = await fs.readFile(data.product.filePath)
